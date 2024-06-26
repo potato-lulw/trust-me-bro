@@ -49,7 +49,7 @@ const AddSource = () => {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Title</Label>
-                <Input id="name" placeholder="Event" />
+                <Input id="name" placeholder="Event" autoComplete="off"/>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="framework">Date</Label>
@@ -65,6 +65,7 @@ const AddSource = () => {
                     value={link}
                     onChange={(event) => handleLinkChange(index, event)}
                     className="mb-2"
+                    autoComplete="off"
                   />
                 ))}
               </div>

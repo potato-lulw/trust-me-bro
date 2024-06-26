@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/themeProvider";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +15,10 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
 
 
-      <body className={inter.className}>
+      <body className={`${inter.className}  min-h-screen flex flex-col` }>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <Header/>
+          <div className="flex-1 flex flex-col">{children}</div>
         </ThemeProvider>
       </body>
 

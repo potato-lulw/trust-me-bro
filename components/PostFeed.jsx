@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import Post from './post';
 
 const PostFeed = () => {
     const [posts, setPosts] = useState([]);
@@ -23,17 +24,13 @@ const PostFeed = () => {
 
     return (
         <div className='mt-2'>
-            <h2>Posts</h2>
+            {/* <h2>Posts</h2> */}
             {posts ? (
-                <ul>
+                <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  gap-4 gap-y-8'>
                     {posts.map(post => (
-                        <li key={post.id}>
-                            <p>Event: {post.event}</p>
-                            <p>Date: {post.date}</p>
-                            <p>Links: {post.links}</p>
-                        </li>
+                        <Post key={post.id} post ={post}/>
                     ))}
-                </ul>
+                </div>
             ) : (
                 <p>Loading...</p>
             )}

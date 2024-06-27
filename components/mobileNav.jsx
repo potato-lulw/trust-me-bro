@@ -12,6 +12,7 @@ import { RiMenu4Line } from 'react-icons/ri';
 import { MdLightMode, MdNightlight } from 'react-icons/md';
 import { useTheme } from 'next-themes';
 import { FaPlus } from 'react-icons/fa';
+import Link from 'next/link';
 
 const MobileNav = () => {
     const {theme, setTheme} = useTheme();
@@ -33,7 +34,8 @@ const MobileNav = () => {
             {/* <DropdownMenuItem>Search</DropdownMenuItem> */}
             <DropdownMenuItem>
               <Button className="w-full gap-2 flex">
-                Add <FaPlus/>
+                <Link href={"/add"} className='flex gap-2 items-center'>Add <FaPlus/></Link>
+                
               </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>

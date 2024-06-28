@@ -33,8 +33,8 @@ const Post = ({ post }) => {
   const seperatedLinks = (post.links).split(",");
 
   return (
-    <Card className="w-[350px] h-fit">
-      <CardHeader>
+    <Card className="w-[350px] h-fit transition">
+      <CardHeader className=" pt-4 pb-2">
         <CardTitle className="text-base text-primary">{post.date && date}</CardTitle>
       </CardHeader>
       <CardContent>
@@ -59,8 +59,8 @@ const Post = ({ post }) => {
           </div>
         )}
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="secondary" className="w-full" onClick={toggleExpand}>
+      <CardFooter className="flex justify-between ">
+        <Button variant="secondary" className="w-full " onClick={toggleExpand}>
           {isExpanded ? "Collapse" : "Source"}
         </Button>
       </CardFooter>

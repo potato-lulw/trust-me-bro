@@ -14,8 +14,12 @@ import { Label } from "@/components/ui/label";
 import { DatePosted } from "@/components/datePosted";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const AddSource = () => {
+
+  const router = useRouter();
+
   const [links, setLinks] = useState([""]);
   const [date, setDate] = useState(null);
   const [event, setEvent] = useState("");
@@ -67,6 +71,8 @@ const AddSource = () => {
         if (response.ok) {
           console.log("POST request successful");
           setError("");
+          router.push("/");
+          
         } else {
           console.log("POST request failed", await response.text());
           setError("Failed to send POST request");

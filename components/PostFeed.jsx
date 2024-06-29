@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import Post from './post';
+import Hero from './Hero';
 
 const PostFeed = () => {
   const [posts, setPosts] = useState([]);
@@ -35,7 +36,7 @@ const PostFeed = () => {
           ))}
         </div>
       ) : (
-        <div></div>
+        <div className='h-full'><Hero/></div>
       )}
     </div>
   );

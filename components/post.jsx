@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { IoClose } from "react-icons/io5";
 import {
   Card,
   CardContent,
@@ -9,13 +10,13 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { FaTrash } from "react-icons/fa";
+import { FaCross, FaTrash } from "react-icons/fa";
 
 const Post = ({ post, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [deleteInit, setDeleteInit] = useState(false);
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   
   const dateObject = new Date(post.date);
   const month = [
@@ -38,12 +39,8 @@ const Post = ({ post, onDelete }) => {
 
   const separatedLinks = post.links.split(",").map((link) => link.trim());
 
- 
-
   const handlePostDelete = async () => {
-    
     if(password === process.env.NEXT_PUBLIC_POST_KEY){
-
       const response = await fetch(`/api/posts/${post.id}`, {
         method: "DELETE",
       });
@@ -54,14 +51,13 @@ const Post = ({ post, onDelete }) => {
         console.error("Failed to delete the post");
       }
       setError("");
-    }
-    else {
+    } else {
       setError("Invalid Password");
     }
   };
 
   return (
-    <Card className="w-[350px] h-fit transition">
+    <Card className="w-[350px] h-fit transition shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] dark:shadow-[_0px_5px_10px_rgba(199,_35,_35,_1)]">
       <CardHeader className="pt-4 pb-2 flex justify-between items-center">
         <CardTitle className="text-base text-primary flex justify-between w-full items-center">
           {post.date && date}
@@ -69,6 +65,7 @@ const Post = ({ post, onDelete }) => {
             onClick={() => setDeleteInit(true)}
             className={`${deleteInit ? "hidden" : ""} cursor-pointer`}
           />
+          <IoClose className={`${deleteInit? "" : "hidden"} cursor-pointer text-2xl`} onClick={() => setDeleteInit(false)}/>
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -78,7 +75,7 @@ const Post = ({ post, onDelete }) => {
             <FaTrash onClick={handlePostDelete} className="cursor-pointer" />
           </div>
         )}
-        {error && (<div>{error}</div>)}
+        {error && deleteInit && (<div className="font-bold text-sm text-primary text-center">{error}</div>)}
         <form>
           <div className="grid w-full items-center gap-2">
             <div className="flex flex-col space-y-1.5">
@@ -87,24 +84,25 @@ const Post = ({ post, onDelete }) => {
           </div>
         </form>
         {isExpanded && (
-          <div className="mt-4 flex flex-col gap-2 text-gray-600">
+          <div className="mt-4 flex flex-col gap-2 text-gray-600 overflow-hidden">
             <Label htmlFor="links" className="text-secondary-foreground">
               Links
             </Label>
-            {separatedLinks.map((link) => {
+            {separatedLinks.map((link, index) => {
               const formattedLink =
                 link.startsWith("http://") || link.startsWith("https://")
                   ? link
                   : `http://${link}`;
               return (
                 <a
-                  className="font-medium border-b border-border w-fit"
+                  className="font-medium border-b border-border w-fit  inline-flex " 
                   href={formattedLink}
                   target="_blank"
                   rel="noreferrer"
                   key={link}
                 >
-                  {link}
+                  <span>{index + 1}. </span>
+                  <span className="ml-1">{link}</span>
                 </a>
               );
             })}

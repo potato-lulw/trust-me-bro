@@ -44,9 +44,12 @@ const AddSource = () => {
     setLinks(newLinks);
   };
 
+  console.log(links)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formattedLinks = links.join(", ");
+    console.log(typeof(formattedLinks));
     console.log("Event:", event);
     console.log("Date:", date);
     console.log("Links:", formattedLinks);

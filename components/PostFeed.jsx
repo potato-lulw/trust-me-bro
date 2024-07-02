@@ -28,15 +28,16 @@ const PostFeed = () => {
   };
 
   return (
-    <div className='mt-2'>
+    <div className='mt-2 flex flex-col items-center'>
+      <div className=''><Hero /></div>
       {posts.length > 0 ? (
-        <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-4 gap-y-8'>
+        <div className={`w-full ${posts.length === 1 ? 'flex justify-center' : 'grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-4 gap-y-8 px-2'}`}>
           {posts.map((post) => (
             <Post key={post.id} post={post} onDelete={handleDeletePost} />
           ))}
         </div>
       ) : (
-        <div className='h-full'><Hero/></div>
+        <div></div>
       )}
     </div>
   );

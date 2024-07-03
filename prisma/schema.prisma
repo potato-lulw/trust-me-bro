@@ -9,13 +9,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Posts {
-  id    Int      @id @default(autoincrement())
-  event String 
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  event String
   date  DateTime @default(now())
   links String
 }

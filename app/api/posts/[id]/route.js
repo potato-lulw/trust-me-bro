@@ -1,17 +1,18 @@
-// app/api/posts/[id]/route.js
 
-import { prisma } from '@/prisma/client';
 import { NextResponse } from 'next/server';
+import Post from '@/models/Post'; 
+import connectDb from '@/lib/db'; 
 
 export async function DELETE(request, { params }) {
   const { id } = params;
 
   try {
-    await prisma.posts.delete({
-      where: {
-        id: parseInt(id, 10),
-      },
-    });
+    await connectDb(); // Connect to the database
+    const result = await Post.findByIdAndDelete(id); // Delete the post by its _id
+
+    if (!result) {
+      return NextResponse.json({ message: 'Post not found' }, { status: 404 });
+    }
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {

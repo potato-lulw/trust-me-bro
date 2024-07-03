@@ -37,11 +37,12 @@ const Post = ({ post, onDelete }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const separatedLinks = post.links.split(",").map((link) => link.trim());
+  const links = post.links
 
   const handlePostDelete = async () => {
     if(password === process.env.NEXT_PUBLIC_POST_KEY){
-      const response = await fetch(`/api/posts/${post.id}`, {
+      console.log(post._id)
+      const response = await fetch(`/api/posts/${post._id}`, {
         method: "DELETE",
       });
   
@@ -88,7 +89,7 @@ const Post = ({ post, onDelete }) => {
             <Label htmlFor="links" className="text-secondary-foreground">
               Links
             </Label>
-            {separatedLinks.map((link, index) => {
+            {links.map((link, index) => {
               const formattedLink =
                 link.startsWith("http://") || link.startsWith("https://")
                   ? link

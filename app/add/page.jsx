@@ -48,13 +48,13 @@ const AddSource = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formattedLinks = links.join(", ");
-    console.log(typeof(formattedLinks));
-    console.log("Event:", event);
-    console.log("Date:", date);
-    console.log("Links:", formattedLinks);
-    console.log("Key:", key);
-    console.log("actual key", process.env.NEXT_PUBLIC_POST_KEY);
+    // const formattedLinks = links.join(", ");
+    // console.log(typeof(formattedLinks));
+    // console.log("Event:", event);
+    // console.log("Date:", date);
+    // console.log("Links:", formattedLinks);
+    // console.log("Key:", key);
+    // console.log("actual key", process.env.NEXT_PUBLIC_POST_KEY);
 
     if (key === process.env.NEXT_PUBLIC_POST_KEY) {
       try {
@@ -67,7 +67,7 @@ const AddSource = () => {
           body: JSON.stringify({
             event: event,
             date: date ? date : new Date(),
-            links: formattedLinks,
+            links: links,
           }),
         });
 
